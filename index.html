@@ -7,6 +7,308 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #140026;
+      color: #ffffff;
+    }
+
+    .container-main {
+      width: min(1170px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .nav-blur {
+      background: rgba(20, 0, 38, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-section {
+      background:
+        radial-gradient(circle at 50% 45%, rgba(59, 41, 158, 0.35), transparent 26%),
+        linear-gradient(180deg, #170033 0%, #1b043f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-wave {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1600px, 100%);
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    .hero-wave.desktop-wave {
+      top: 86px;
+    }
+
+    .hero-wave.mobile-wave {
+      display: none;
+    }
+
+    .hero-circle {
+      width: 268px;
+      filter: drop-shadow(0 0 22px rgba(255, 42, 193, 0.16));
+    }
+
+    .mic-icon {
+      width: 96px;
+    }
+
+    .pill-btn {
+      min-height: 48px;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: 0.25s ease;
+    }
+
+    .pill-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-gradient {
+      background: linear-gradient(90deg, #ffd94a 0%, #ff2fa8 52%, #b100ff 100%);
+      color: white;
+      box-shadow: 0 10px 24px rgba(255, 61, 180, 0.2);
+    }
+
+    .btn-outline-green {
+      border: 1.5px solid #00d587;
+      color: #00ef98;
+      background: rgba(0, 213, 135, 0.03);
+    }
+
+    .badge-new {
+      position: absolute;
+      top: 18px;
+      right: 12px;
+      background: #18ff87;
+      color: #002512;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 11px;
+      border-radius: 999px;
+      box-shadow: 0 0 16px rgba(24, 255, 135, 0.5);
+    }
+
+    .section-dark {
+      background: #1d0637;
+    }
+
+    .section-deeper {
+      background: #120026;
+    }
+
+    .stat-number {
+      color: #15f494;
+      font-size: clamp(36px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .feature-card,
+    .episode-card,
+    .host-card {
+      background: #2a0d4d;
+      border-radius: 26px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .feature-card {
+      padding: 28px;
+      min-height: 205px;
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      margin-bottom: 24px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 2.1fr 1fr;
+      gap: 18px;
+      grid-template-areas:
+        "audio mobile mobile"
+        "audio global global"
+        "exclusive exclusive resource";
+    }
+
+    .audio { grid-area: audio; }
+    .mobile { grid-area: mobile; }
+    .global { grid-area: global; }
+    .exclusive { grid-area: exclusive; }
+    .resource { grid-area: resource; }
+
+    .episode-card {
+      overflow: hidden;
+      padding-bottom: 18px;
+    }
+
+    .episode-thumb {
+      position: relative;
+      aspect-ratio: 1.47 / 1;
+      overflow: hidden;
+      border-radius: 18px 18px 0 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 60, 215, 0.28), transparent 22%),
+        linear-gradient(135deg, rgba(39, 16, 68, 0.5), rgba(23, 9, 45, 0.2)),
+        url('hero-bg.png') center/cover no-repeat;
+    }
+
+    .episode-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(12,0,25,0.18) 100%);
+    }
+
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #ffcc44 0%, #ff2da7 55%, #b000ff 100%);
+      box-shadow: 0 16px 30px rgba(255, 48, 173, 0.24);
+      z-index: 2;
+    }
+
+    .play-btn::before {
+      content: '';
+      border-left: 14px solid white;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      margin-left: 4px;
+    }
+
+    .social-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .social-pill img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+
+    .footer-bg {
+      background:
+        linear-gradient(180deg, #2b0e50 0%, #2a0d4c 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-wave {
+      position: absolute;
+      inset: auto 0 34px 0;
+      width: 100%;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .muted-line {
+      border-color: rgba(255,255,255,0.06);
+    }
+
+    .nav-links a:hover,
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 1024px) {
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+          "audio mobile"
+          "global exclusive"
+          "resource resource";
+      }
+
+      .hero-circle {
+        width: 232px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container-main {
+        width: min(100% - 24px, 100%);
+      }
+
+      .hero-wave.desktop-wave {
+        display: none;
+      }
+
+      .hero-wave.mobile-wave {
+        display: block;
+        top: 46px;
+        width: 100%;
+      }
+
+      .hero-circle {
+        width: 186px;
+      }
+
+      .mic-icon {
+        width: 72px;
+      }
+
+      .badge-new {
+        top: 14px;
+        right: 0;
+        font-size: 11px;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "audio"
+          "mobile"
+          "global"
+          "exclusive"
+          "resource";
+      }
+
+      .feature-card {
+        min-height: auto;
+        padding: 24px 22px;
+        border-radius: 20px;
+      }
+
+      .episode-card,
+      .host-card {
+        border-radius: 22px;
+      }
+
+      .footer-wave {
+        bottom: 82px;
+        opacity: 0.42;
+      }
+    }
+  </style>
 </head>
 <body>
     
